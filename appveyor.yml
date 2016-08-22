@@ -1,21 +1,54 @@
+# AppVeyor file
+# http://www.appveyor.com/docs/appveyor-yml
+# This file: cloned from https://github.com/gruntjs/grunt/blob/master/appveyor.yml
+
+# Build version format
+version: "{build}"
+
 #image: Visual Studio 2015 - GCE
 environment:
   website_name: aspnetcorespa
   website_psw:
     secure: twePnoXZKws9fnk2LMHNBO7AFl7Lkl6oiEq6SHFKkDUxHDakKM56umRYI7qCz2X4QlknC+ko1JwpphPAfl9p3g==
+  nodejs_version: "5.5.0"
+
 branches:
   only:
     - master
+    # Fix line endings on Windows
+init:
+  - git config --global core.autocrlf true
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm install -g npm typings
+  - ps: $env:path = $env:appdata + "\npm;" + $env:path
+  - npm install
+  - typings install
+
+test_script:
+  # Output useful info for debugging.
+  - node --version && npm --version
+  - node -e 'console.log(process.env);'
+  - cmd: npm test
+
+cache:
+  - node_modules -> package.json                                        # local npm modules
+
 before_build:
-- dotnet restore
+  - npm run build:prod                                           # Client production artefacts
+  - dotnet restore
+
 build:
+  project: AspNetCoreSpa.sln
   parallel: true
   verbosity: minimal
+
 after_build:
-- dotnet publish .\ --output %appveyor_build_folder%\dist --configuration Debug --no-build
-test: off
+  - dotnet publish .\ --output %appveyor_build_folder%\dist --configuration Debug --no-build
+
 artifacts:
 - path: dist
   name: web-app
 deploy_script:
-- '"C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" -source:IisApp=''%appveyor_build_folder%\dist'' -dest:IisApp=''%website_name%'',ComputerName=''https://%website_name%.scm.azurewebsites.net/msdeploy.axd'',UserName=''$%website_name%'',Password=''%website_psw%'',IncludeAcls=''False'',AuthType=''Basic'' -verb:sync -enablerule:AppOffline -enableRule:DoNotDeleteRule -retryAttempts:2'
+- cmd: '"C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" -source:IisApp=''%appveyor_build_folder%\dist'' -dest:IisApp=''%website_name%'',ComputerName=''https://%website_name%.scm.azurewebsites.net/msdeploy.axd'',UserName=''$%website_name%'',Password=''%website_psw%'',IncludeAcls=''False'',AuthType=''Basic'' -verb:sync -enablerule:AppOffline -enableRule:DoNotDeleteRule -retryAttempts:2'
