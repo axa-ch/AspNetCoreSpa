@@ -1,5 +1,6 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/ilf9yiplb03f1a02?svg=true)](https://ci.appveyor.com/project/asadsahi/aspnetcorespa)
-[![Join the chat at https://gitter.im/mgechev/angular2-seed](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aspnetcorespa/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build status](https://asadsahi.visualstudio.com/_apis/public/build/definitions/a1519ab8-9104-47eb-96cc-6c37519c8b69/7/badge)](https://asadsahi.visualstudio.com/playground/_build/index?context=allDefinitions&path=%5C&definitionId=7&_a=completed)
+[![Build status](https://ci.appveyor.com/api/projects/status/xm3d3c8wens0ee1b?svg=true)](https://ci.appveyor.com/project/asadsahi/aspnetcorespa)
+[![Join the chat at https://gitter.im/aspnetcorespa/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aspnetcorespa/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Dependency Status](https://david-dm.org/asadsahi/AspNetCoreSpa.svg)](https://david-dm.org/asadsahi/AspNetCoreSpa)
 [![devDependencies Status](https://david-dm.org/asadsahi/AspNetCoreSpa/dev-status.svg)](https://david-dm.org/asadsahi/AspNetCoreSpa?type=dev)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
@@ -8,8 +9,12 @@
 
 * [ASP.NET Core](http://www.dot.net/)
 * [Entity Framework Core](https://docs.efproject.net/en/latest/)
-* [Angular 2 RC5](https://angular.io/)
-* [Webpack](https://webpack.github.io/)
+* [Angular 2.0.0 Final](https://angular.io/)
+* [Webpack 2](https://webpack.github.io/)
+* [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
+* [ng-bootstrap](https://ng-bootstrap.github.io/)
+* [ng2-translate](https://github.com/ocombe/ng2-translate)
+* [Typescript 2](http://www.typescriptlang.org/)
 * [SASS](http://sass-lang.com/) support
 * [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular 2.
 * Testing Angular 2 code with [Jasmine](http://jasmine.github.io/) and [Karma](https://karma-runner.github.io/0.13/index.html).
@@ -21,6 +26,7 @@
 * [Typedoc](http://typedoc.io/) for typescript documentation
 * [Server](https://github.com/aspnet/dotnet-watch) and [client](https://webpack.github.io/docs/hot-module-replacement.html) watches
 * Login and Registration functionality using [Asp.Net Identity](https://docs.asp.net/en/latest/security/authentication/identity.html)
+* Extensible User/Role identity implementation
 * Various social login support, Follow [this](https://github.com/asadsahi/AspNetCoreSpa/wiki/Social-Login-Setup) wiki page to see how it will work.
 * Lazy loading of all routes, child routes (About page example) with basic animation example (On about page).
 * [Angular 2 dynamic forms](https://angular.io/docs/ts/latest/cookbook/dynamic-form.html) for reusability and to keep html code DRY.
@@ -30,7 +36,7 @@
 ## Pre-requisites
 
 1. [.Net core sdk](https://www.microsoft.com/net/core#windows)
-2. Either [VSCode](https://code.visualstudio.com/) with [C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) extension OR [Visual studio 2015 update 3](https://www.visualstudio.com/) with [.Net Core tooling](https://www.microsoft.com/net/core#windows)
+2. Either [VSCode](https://code.visualstudio.com/) with [C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) extension OR [Visual studio 2015 update 4](https://www.visualstudio.com/) with [.Net Core tooling](https://www.microsoft.com/net/core#windows)
 3. [Nodejs](https://nodejs.org/en/)
 
 **Make sure you have Node version >= 5.0 and NPM >= 3**
@@ -43,16 +49,15 @@
     cd AspNetCoreSpa
 3. dotnet restore
 4. Install global dependencies
-    npm install webpack protractor typings rimraf -g
+    npm install protractor rimraf -g
 5. npm install
-6. typings install
-7. Create webpack vendor manifest file for fast webpack rebuils
-    webpack --config config/webpack.config.vendor.js
-8. Set appropriate environment 
+6. Create webpack vendor manifest file for fast webpack rebuils
+    npm run build:vendor
+7. Set appropriate environment 
     set ASPNETCORE_ENVIRONMENT=Development
-9. Run the app 
+8. Run the app 
     dotnet run (for single run) OR dotnet watch (in watch mode)
-10. Browse using http://localhost:5000 or http://localhost:5001 
+9. Browse using http://localhost:5000 or http://localhost:5001 
 
 ```
 

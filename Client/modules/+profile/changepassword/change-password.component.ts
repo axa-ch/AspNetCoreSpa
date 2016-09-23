@@ -1,10 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/common';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { ProfileService } from '../profile.service';
 import { ChangePasswordModel } from './change-password.model';
-import { PageHeadingComponent } from '../../shared/directives';
-import { ValidationService } from '../../shared/forms';
+import { ValidationService } from '../../shared/forms/validation.service';
 
 @Component({
     selector: 'appc-change-password',

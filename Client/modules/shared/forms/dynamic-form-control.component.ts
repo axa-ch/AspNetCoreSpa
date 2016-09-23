@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ControlBase }     from './controls';
+import { ControlBase }     from './control-base';
 import { ErrorMessageComponent }     from './error-message.component';
 
 @Component({
@@ -8,10 +8,19 @@ import { ErrorMessageComponent }     from './error-message.component';
     templateUrl: './dynamic-form-control.component.html'
 })
 export class DynamicFormControlComponent {
-    @Input() control: ControlBase<any>;
-    @Input() form: FormGroup;
+    @Input() control;
+    @Input() form;
 
-    get isValid() {
+    constructor() {
+        this.control = undefined;
+        this.form = undefined;
+    }
+
+    get valid() {
         return this.form.controls[this.control.key].valid;
+    }
+
+    get invalid() {
+        return !this.form.controls[this.control.key].valid && this.form.controls[this.control.key].touched;
     }
 }

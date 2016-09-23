@@ -4,8 +4,10 @@ import { Response } from '@angular/http';
 
 import { LoginModel } from './login.model';
 import { LoginService } from './login.service';
-import { AuthService } from '../shared/services';
-import { ControlBase, ControlTextbox, ControlCheckbox } from '../shared/forms';
+import { AuthService } from '../shared/services/auth.service';
+import { ControlBase} from '../shared/forms/control-base';
+import { ControlTextbox } from '../shared/forms/control-textbox';
+import { ControlCheckbox } from '../shared/forms/control-checkbox';
 
 
 @Component({
@@ -59,8 +61,8 @@ export class LoginComponent implements OnInit {
             new ControlCheckbox({
                 key: 'rememberMe',
                 label: 'Remember me?',
+                type: 'checkbox',
                 value: false,
-                class: 'rememberme',
                 order: 3
             })
         ];

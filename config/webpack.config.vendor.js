@@ -6,25 +6,28 @@ var isDevelopment = process.env.ASPNETCORE_ENVIRONMENT === 'Development';
 
 module.exports = {
     resolve: {
-        extensions: [ '', '.js' ]
+        extensions: ['', '.js']
     },
     module: {
         loaders: [
             { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
-            { test: /\.css/, loader: extractCSS.extract(['css']) }
+            { test: /\.css/, loader: extractCSS.extract(['css']) },
+            { test: /\.json$/, loader: 'json-loader' }
         ]
     },
     entry: {
         vendor: [
+            'font-awesome/css/font-awesome.css',
             'bootstrap/dist/css/bootstrap.css',
             'style-loader',
             '@angular/common',
             '@angular/compiler',
             '@angular/core',
             '@angular/http',
+            '@angular/forms',
             '@angular/platform-browser',
             '@angular/platform-browser-dynamic',
-            '@angular/router',
+            '@angular/router'
         ]
     },
     output: {
@@ -34,7 +37,7 @@ module.exports = {
     },
     plugins: [
         extractCSS,
-        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.DllPlugin({
             path: path.join(__dirname, '../wwwroot', 'dist', '[name]-manifest.json'),
             name: '[name]_[hash]'

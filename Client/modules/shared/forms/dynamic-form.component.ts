@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnInit }  from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { ControlBase, FormControlService } from './controls';
+import { ControlBase } from './control-base';
+import { FormControlService } from './form-control.service';
 
 @Component({
     selector: 'appc-dynamic-form',
@@ -15,8 +16,7 @@ export class DynamicFormComponent implements OnInit {
     // Note: don't keep name of output events as same as native events such as submit etc.
     @Output() formsubmit: EventEmitter<any> = new EventEmitter<any>();
     form: FormGroup;
-    payLoad = '';
-
+    
     constructor(private _controlService: FormControlService) { }
 
     ngOnInit() {
